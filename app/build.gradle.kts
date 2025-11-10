@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.serializable)
 }
 
 android {
@@ -51,8 +52,22 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
 
-    // Koin
-    implementation(libs.koin)
+    // Koin with compose
+    implementation(libs.koin.compose)
+
+    // Navigation with compose
+    implementation(libs.navigation.compose)
+
+    // Retrofit 2 with compose
+    implementation(libs.retro2)
+    implementation(libs.retro2.conver)
+
+    // coil with compose - image handler
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
+
+    // Compose components
+    implementation(libs.androidx.compose.foundation)
 
     testImplementation(libs.junit)
 
