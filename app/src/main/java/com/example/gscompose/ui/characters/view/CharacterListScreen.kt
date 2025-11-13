@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.gscompose.data.GSCharacter
 import com.example.gscompose.ui.characters.interpreter.CharacterListAction
 import com.example.gscompose.ui.characters.interpreter.CharacterListEvent
 import com.example.gscompose.ui.characters.interpreter.CharacterListState
@@ -34,7 +35,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CharacterListScreenRoot(
-    onNavigateToCharacterDetails: () -> Unit,
+    onNavigateToCharacterDetails: (GSCharacter) -> Unit,
     characterListViewModel: CharacterListViewModel = koinViewModel()
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -56,6 +57,12 @@ fun CharacterListScreenRoot(
     CharacterListScreen(
         characterListState = characterListViewModel.state,
         onAction = { action ->
+            when (action) {
+                is CharacterListAction.OnCharacterClick ->
+                    onNavigateToCharacterDetails(
+                        action.character
+                    )
+            }
             characterListViewModel
                 .onAction(
                     characterListAction = action
@@ -88,7 +95,16 @@ fun CharacterListScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(characterListState.characterList) { character ->
-                CharacterItem(character)
+                CharacterItem(
+                    character = character,
+                    onItemClick = { character ->
+                        onAction(
+                            CharacterListAction.OnCharacterClick(
+                                character = character
+                            )
+                        )
+                    }
+                )
             }
         }
     }

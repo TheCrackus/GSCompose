@@ -1,5 +1,6 @@
 package com.example.gscompose.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,7 +27,10 @@ import coil.request.ImageRequest
 import com.example.gscompose.data.GSCharacter
 
 @Composable
-fun CharacterItem(character: GSCharacter) {
+fun CharacterItem(
+    character: GSCharacter,
+    onItemClick: (GSCharacter) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -37,8 +41,11 @@ fun CharacterItem(character: GSCharacter) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(12.dp)
+                .clickable {
+                    onItemClick(character)
+                },
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)

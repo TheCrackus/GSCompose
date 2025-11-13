@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.gscompose.ui.characterdetails.view.CharacterDetailsScreenRoot
 import com.example.gscompose.ui.characters.view.CharacterListScreenRoot
 
 @Composable
@@ -15,9 +16,14 @@ fun GSNavController(navController: NavHostController) {
     NavHost(navController, startDestination = CharacterList) {
         composable<CharacterList> { backStackEntry ->
             CharacterListScreenRoot(
-                onNavigateToCharacterDetails = {
-
+                onNavigateToCharacterDetails = { character ->
+                    navController.navigate(route = CharacterDetails)
                 }
+            )
+        }
+        composable <CharacterDetails>{ backStackEntry ->
+            CharacterDetailsScreenRoot(
+
             )
         }
     }

@@ -12,3 +12,6 @@ import kotlinx.serialization.Serializable
  * **/
 @Serializable
 object CharacterList
+
+@Serializable
+object CharacterDetails
