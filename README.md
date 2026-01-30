@@ -1,2 +1,2 @@
 # GSCompose
-This project is a basic compose project using MVI, koin and compose.
+This is a basic compose project that uses MVI+MVVM, koin dependency injection and Jetpack Compose.
